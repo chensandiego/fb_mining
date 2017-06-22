@@ -1,6 +1,6 @@
 
 ##https://developers.facebook.com/tools/explorer/
-ACCESS_TOKEN=''
+ACCESS_TOKEN='EAACEdEose0cBAFSmtXjZBwD5weAUCywSOI1jopR03G2685GtQNOGXZBwdyBMnZCpLeqwlqF5Kp5IXZCbFYNtt4Dmzq2B8eTX9ezfVYNbwwzZAwrodX0ZBoai622J7zdaTy8vLRct3kMjyZB0YrgwNoygmS1Bca4PpkCJ8rmS5LkRbmXzzfThCWwovzN5y2rBakZD'
 
 import requests
 
@@ -34,7 +34,7 @@ print(g.request("search",{'q':'Carina Lee','type':'user'}))
 taylor_swift_id='19614945368'
 drake_id='83711079303'
 beyonce_id='28940545600'
-
+twice_id='1577673735847735'
 
 
 def get_total_fans(page_id):
@@ -84,8 +84,12 @@ twift_fans=get_total_fans(taylor_swift_id)
 drake_fans=get_total_fans(drake_id)
 
 beyonce_fans=get_total_fans(beyonce_id)
+twice_fans=get_total_fans(twice_id)
 
 #get total fans from three artists
+
+print('Twice : {0} fans on Facebook'.format(twice_fans))
+
 print('Taylor Swift: {0} fans on Facebook'.format(twift_fans))
 
 print('Drake: {0} fans on Facebook'.format(drake_fans))
@@ -93,7 +97,7 @@ print('Drake: {0} fans on Facebook'.format(drake_fans))
 print('Beyonce : {0} fans on Facebook'.format(beyonce_fans))
 
 
-for artist in [taylor_swift_id,drake_id,beyonce_id]:
+for artist in [twice_id,taylor_swift_id,drake_id,beyonce_id]:
     print()
     feed=retrieve_page_feed(artist,5)
     for i, post in enumerate(feed):
@@ -127,7 +131,7 @@ def measure_engagement(post_id,total_fans):
 
 ###retrieve last 5 msg from feeds print the reaction and level of engagement
 
-artist_dict={'Taylor Swift':taylor_swift_id,
+artist_dict={'Twice':twice_id,'Taylor Swift':taylor_swift_id,
             'Drake':drake_id,
             'Beyonce':beyonce_id}
 
@@ -160,7 +164,7 @@ columns=['Name','Total Fans','Post Number','Post Date','Headline','Likes','Share
 
 musicians = pd.DataFrame(columns=columns)
 
-for page_id in [taylor_swift_id,drake_id,beyonce_id]:
+for page_id in [twice_id,taylor_swift_id,drake_id,beyonce_id]:
     name=g.get_object(id=page_id)['name']
     fans=get_total_fans(page_id)
     feed=retrieve_page_feed(page_id,10)
@@ -189,18 +193,38 @@ print (musicians.head())
 
 
 
-musicians[musicians['Name']=='Drake'].plot(x='Post Number',y='Likes',kind='bar')
+musicians[musicians['Name']=='TWICE'].plot(x='Post Number',y='Likes',kind='bar')
 
-musicians[musicians['Name']=='Drake'].plot(x='Post Number',y='Shares',kind='bar')
+musicians[musicians['Name']=='TWICE'].plot(x='Post Number',y='Shares',kind='bar')
 
-musicians[musicians['Name']=='Drake'].plot(x='Post Number',y='Comments',kind='bar')
+musicians[musicians['Name']=='TWICE'].plot(x='Post Number',y='Comments',kind='bar')
 
 
-musicians[musicians['Name']=='Drake'].plot(x='Post Number',y='Rel. likes',kind='bar')
+musicians[musicians['Name']=='TWICE'].plot(x='Post Number',y='Rel. likes',kind='bar')
 
-musicians[musicians['Name']=='Drake'].plot(x='Post Number',y='Rel. shares',kind='bar')
+musicians[musicians['Name']=='TWICE'].plot(x='Post Number',y='Rel. shares',kind='bar')
 
-musicians[musicians['Name']=='Drake'].plot(x='Post Number',y='Rel. Comments',kind='bar')
+musicians[musicians['Name']=='TWICE'].plot(x='Post Number',y='Rel. Comments',kind='bar')
+
+
+
+
+
+
+
+#musicians[musicians['Name']=='Drake'].plot(x='Post Number',y='Likes',kind='bar')
+
+#musicians[musicians['Name']=='Drake'].plot(x='Post Number',y='Shares',kind='bar')
+
+#musicians[musicians['Name']=='Drake'].plot(x='Post Number',y='Comments',kind='bar')
+
+
+#musicians[musicians['Name']=='Drake'].plot(x='Post Number',y='Rel. likes',kind='bar')
+
+#musicians[musicians['Name']=='Drake'].plot(x='Post Number',y='Rel. shares',kind='bar')
+
+#musicians[musicians['Name']=='Drake'].plot(x='Post Number',y='Rel. Comments',kind='bar')
+
 
 
 
